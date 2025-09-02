@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>两城抗战历史 - 武汉与南京</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
         }
         
         body {
-            background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+            background: #f8f9fa;
             color: #333;
             line-height: 1.8;
-            padding-bottom: 50px;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .container {
@@ -30,18 +30,16 @@
         /* 头部样式 */
         header {
             text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1587334274527-ba54f0b5a357?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
             background-size: cover;
-            background-position: center;
             color: white;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             border-bottom: 5px solid #c40d0d;
         }
         
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
@@ -70,14 +68,13 @@
         }
         
         .nav-btn {
-            padding: 15px 25px;
+            padding: 15px 30px;
             color: white;
             background: none;
             border: none;
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
-            position: relative;
         }
         
         .nav-btn:hover {
@@ -88,19 +85,6 @@
             background: #c40d0d;
         }
         
-        .nav-btn.active:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid #f8f8f8;
-        }
-        
         /* 内容区域 */
         .city-section {
             background: white;
@@ -109,7 +93,6 @@
             margin-bottom: 40px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
         }
         
         .city-section:before {
@@ -158,6 +141,7 @@
             text-align: justify;
             font-size: 1.1rem;
             text-indent: 2em;
+            line-height: 1.8;
         }
         
         /* 时间线样式 */
@@ -225,11 +209,12 @@
         .quote {
             background: #fff9e6;
             border-left: 5px solid #e67e22;
-            padding: 20px;
+            padding: 25px;
             margin: 25px 0;
             border-radius: 5px;
             font-style: italic;
             position: relative;
+            font-size: 1.1rem;
         }
         
         .quote:before {
@@ -246,7 +231,7 @@
         /* 页脚样式 */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             margin-top: 50px;
             background: #2c3e50;
             color: #ecf0f1;
@@ -288,7 +273,7 @@
         /* 响应式设计 */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .subtitle {
@@ -313,6 +298,11 @@
             
             .content-block p {
                 font-size: 1rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -352,5 +342,141 @@
             
             <div class="content-block">
                 <h3>武汉会战</h3>
-                <p>武汉会战
-               
+                <p>武汉会战，又称武汉保卫战，是1938年6月至10月，中国军队为了保卫武汉，在安徽、江西、河南、湖北等省交界地区抗击侵华日军进攻的防御战役，是抗日战争战略防御阶段规模最大的一次战略性战役。</p >
+                
+                <div class="timeline">
+                    <h4><i class="fas fa-history"></i> 武汉会战时间线</h4>
+                    <ul>
+                        <li>1938年6月15日：日本御前会议正式决定实施攻占武汉的作战</li>
+                        <li>6月中旬至7月初：国民政府军事委员会制定和完善武汉保卫战作战计划</li>
+                        <li>8月至9月：中国军队在江南万家岭地区歼灭日军4个联队</li>
+                        <li>10月：日军攻陷岳阳、信阳，逼近武昌</li>
+                        <li>10月25日：中国军队按预定计划放弃武汉</li>
+                    </ul>
+                </div>
+                
+                <p>1938年6月15日，日本御前会议正式决定实施攻占武汉的作战。中国军队以武汉及附近地区为中心，同日本侵略军展开了一场大规模会战；6月中旬至7月初，国民政府军事委员会制定和完善了武汉保卫战的作战计划，具体作战方针是：在武汉外围布置主力军，利用鄱阳湖和大别山以及长江两岸丘陵湖沼等有利地形进行持久战。会战期间，中国共产党对武汉保卫战给予多方支持和配合。日军从长江南北分兵进逼武汉。中国军队节节抵抗，在江南万家岭地区歼灭敌人4个联队，在江北田家镇等地予敌以重创。随后日军发起反扑，相继攻陷岳阳、信阳，逼近武昌，推进至武胜关，对中国军队形成两翼包围之势。中国军队按预定计划向平汉铁路以西撤退，于10月25日放弃武汉。日军占领武汉后，因战线加长，国力所限，对华战略攻势已达极限，"速战速决"的迷梦彻底破灭。武汉会战历时4个半月，日军共伤亡20多万人。</p >
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">4.5</div>
+                        <div class="stat-label">个月持续时间</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20万+</div>
+                        <div class="stat-label">日军伤亡人数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">战略</div>
+                        <div class="stat-label">相持阶段开始</div>
+                    </div>
+                </div>
+                
+                <div class="quote">
+                    武汉会战大大消耗了日军的有生力量，打破了日本妄想迫使中国屈服、早日结束战争的计划，是中国抗日战争战略转折的关键节点。
+                </div>
+                
+                <p>武汉会战意义重大，大大消耗了日军的有生力量，打破了日本妄想迫使中国屈服、早日结束战争的计划，是中国抗日战争战略转折的关键节点，粉碎了日军"速战速决"占领全中国的美梦。以武汉会战结束为标志，中国抗日战争进入战略相持阶段。武汉会战不仅是一场关乎战略存亡的军事较量，更立起中华儿女共筑抗日长城的团结丰碑。</p >
+            </div>
+        </section>
+               <!-- 南京部分 -->
+        <section id="nanjing" class="city-section">
+            <div class="city-header">
+                <div class="city-icon">
+                    <i class="fas fa-monument"></i>
+                </div>
+                <h2 class="city-title">南京抗战历史</h2>
+            </div>
+            
+            <div class="content-block">
+                <p>南京大屠杀是对日军侵占南京后所犯屠杀、奸淫、纵火、劫掠等暴行的统称，是日军侵华暴行中最野蛮、最凶残的典型事件，主要发生于1937年12月13日至1938年1月的六周内。</p >
+                
+                <div class="timeline">
+                    <h4><i class="fas fa-history"></i> 南京大屠杀时间线</h4>
+                    <ul>
+                        <li>1937年11月：淞沪会战结束，日军分三路向南京进逼</li>
+                        <li>12月7日：松井石根起草《攻占南京城要领》</li>
+                        <li>12月13日：日军占领南京，开始大屠杀</li>
+                        <li>1938年1月：大规模屠杀逐渐减少</li>
+                        <li>1946-1948年：东京审判和南京审判追究战犯罪行</li>
+                    </ul>
+                </div>
+                
+                <p>1937年11月，淞沪会战结束后，日军分三路向南京进逼，企图占领南京，迫使中国政府投降；12月7日，日军华中方面军司令官松井石根亲自起草《攻占南京城要领》，要求部队入城扫荡；随后，日本朝香宫鸠彦亲王签署密令，要求"杀掉全部俘虏"；12月13日，日本侵略者占领南京，在日本华中派遣军司令松井石根和第六师团师团长谷寿夫指挥下，日军使用集体枪杀、活埋、刀劈、火烧等惨绝人寰的手段，杀害中国军民，并在之后的六周内，屠杀、奸淫、掠夺、焚烧和破坏并举，对南京造成空前劫难。</p >
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">30万+</div>
+                        <div class="stat-label">同胞遇难</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6周</div>
+                        <div class="stat-label">暴行持续时间</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">27</div>
+                        <div class="stat-label">登记在册幸存者(2025年)</div>
+                    </div>
+                </div>
+                
+                <p>战后，中国国民政府对南京大屠杀进行了广泛的调查，其中，南京审判战犯军事法庭经调查判定，日军集体屠杀有28案，屠杀人数19万余人，零散屠杀有858案，死亡人数15万余人，总计死亡人数达30多万。抗战胜利后，松井石根被判处绞刑，谷寿夫被处以死刑。截至2025年5月3日，登记在册的南京大屠杀幸存者仅剩27人。</p >
+                
+                <div class="quote">
+                    南京大屠杀是侵华日军公然违反国际条约和人类基本道德准则的罪恶行径，是日军在侵华战争期间无数暴行中最突出、最有代表性的一例。
+                </div>
+                
+                <p>南京大屠杀是侵华日军公然违反国际条约和人类基本道德准则的罪恶行径，是日军在侵华战争期间无数暴行中最突出、最有代表性的一例。其暴行被《纽约时报》《中央日报》《新华日报》等中外媒体广泛揭露。2014年，中国将12月13日定为南京大屠杀死难者国家公祭日。2015年，《南京大屠杀史档案》被列入《世界记忆名录》。</p >
+            </div>
+            
+            <div class="content-block">
+                <h3>历史意义与纪念</h3>
+                <p>南京大屠杀的历史教训深刻提醒人们战争的残酷性与和平的珍贵。每年的国家公祭日，中国各地都会举行纪念活动，缅怀遇难同胞，宣誓维护和平的决心。南京大屠杀纪念馆作为重要的历史教育基地，向世界讲述这段历史，警示后人珍视和平，反对战争。</p >
+                
+                <p>这段历史不仅是中国人民的集体记忆，也是全人类的历史教训。它告诉我们，和平来之不易，必须坚决捍卫；它提醒我们，历史的真相不容篡改，必须世代传承；它警示我们，人性的黑暗面需要时刻警惕，必须用文明和法治加以约束。</p >
+            </div>
+        </section>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <p>铭记历史，缅怀先烈，珍爱和平，开创未来</p >
+        <p>© 2023 两城抗战历史纪念馆 | 使用 GitHub Pages 创建</p >
+    </footer>
+    
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 滚动到指定部分
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            element.scrollIntoView({ behavior: 'smooth' });
+            
+            // 更新导航按钮状态
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        // 返回顶部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // 显示/隐藏返回顶部按钮
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
+
+ 
