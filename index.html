@@ -1,6 +1,293 @@
-<html>
-<head></head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国城市探索 - 武汉与南京</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .cities-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .city-card {
+            width: 350px;
+            height: 420px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .city-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .city-card:hover .city-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .city-card-front, .city-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .city-card-front {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .city-card-back {
+            background: rgba(0, 0, 0, 0.7);
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+        
+        .city-name {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .city-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            color: #ffdd00;
+        }
+        
+        .city-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .city-info {
+            text-align: left;
+            line-height: 1.6;
+        }
+        
+        .city-info h3 {
+            margin: 15px 0 10px;
+            color: #ffdd00;
+            border-bottom: 1px solid #ffdd00;
+            padding-bottom: 5px;
+        }
+        
+        .btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .cities-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .city-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* 页面过渡动画 */
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
 <body>
-你好
-</body>
-</html>
+    <div class="container">
+        <!-- 首页 -->
+        <div id="home-page" class="page active">
+            <header>
+                <h1>中国名城探索</h1>
+                <p class="subtitle">选择一座城市，发现它的魅力</p >
+            </header>
+            
+            <div class="cities-container">
+                <!-- 武汉卡片 -->
+                <div class="city-card" onclick="showCity('wuhan')">
+                    <div class="city-card-inner">
+                        <div class="city-card-front">
+                            <div class="city-name">武汉</div>
+                            <div class="city-icon"><i class="fas fa-city"></i></div>
+                            <p>点击探索这座江城的历史与现代魅力</p >
+                        </div>
+                        <div class="city-card-back">
+                            < img src="https://images.unsplash.com/photo-1582774489365-1010bc695b9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="武汉" class="city-image">
+                            <div class="city-info">
+                                <h3>江城武汉</h3>
+                                <p>湖北省省会，长江与汉江交汇处的特大中心城市，素有"九省通衢"之称。</p >
+                                <h3>著名景点</h3>
+                                <p>黄鹤楼、东湖、长江大桥、户部巷、武汉大学</p >
+                            </div>
+                            <button class="btn">探索武汉</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 南京卡片 -->
+                <div class="city-card" onclick="showCity('nanjing')">
+                    <div class="city-card-inner">
+                        <div class="city-card-front">
+                            <div class="city-name">南京</div>
+                            <div class="city-icon"><i class="fas fa-dragon"></i></div>
+                            <p>点击探索这座古都的历史与文化底蕴</p >
+                        </div>
+                        <div class="city-card-back">
+                            < img src="https://images.unsplash.com/photo-1547279669-0d1470e122ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="南京" class="city-image">
+                            <div class="city-info">
+                                <h3>古都南京</h3>
+                                <p>江苏省省会，中国四大古都之一，有"六朝古都"、"十朝都会"之称。</p >
+                                <h3>著名景点</h3>
+                                <p>中山陵、夫子庙、明孝陵、玄武湖、南京博物院</p >
+                            </div>
+                            <button class="btn">探索南京</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 武汉详情页 -->
+        <div id="wuhan-page" class="page">
+            <header>
+                <h1>武汉 - 江城风采</h1>
+                <p class="subtitle">中部地区中心城市，长江经济带核心城市</p >
+            </header>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="text-align: center; margin: 30px 0;">
+                    < img src="https://images.unsplash.com/photo-1582774489365-1010bc695b9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="武汉全景" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 15px; margin: 30px 0;">
+                    <h2><i class="fas fa-landmark"></i> 城市简介</h2>
+                    <p>武汉，简称"汉"，别称江城，是湖北省省会，中部六省唯一的副省级市，特大城市，中国中部地区的中心城市，全国重要的工业基地、科教基地和综合交通枢纽。</p >
+                    
+                    <h2><i class="fas fa-map-marked-alt"></i> 地理位置</h2>
+                    <p>武汉位于中国腹地中心、湖北省东部、长江与汉水交汇处，是世界第三大河长江及其最长支流汉江横贯市境中央，将武汉城区一分为三，形成了武昌、汉口、汉阳三镇隔江鼎立的格局。</p >
+                    
+                    <h2><i class="fas fa-utensils"></i> 特色美食</h2>
+                    <p>武汉小吃历史悠久，品种繁多，以早点为主，故武汉人把用早餐称为"过早"。热干面、豆皮、面窝、汤包、糊米酒等都是武汉的特色小吃。</p >
+                    
+                    <h2><i class="fas fa-monument"></i> 著名景点</h2>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>黄鹤楼</strong> - "天下江山第一楼"，江南三大名楼之一</li>
+                        <li><strong>东湖</strong> - 中国最大的城中湖，国家5A级旅游景区</li>
+                        <li><strong>长江大桥</strong> - 万里长江第一桥，中国桥梁建设里程碑</li>
+                        <li><strong>户部巷</strong> - 汉味小吃第一巷，武汉早点的标志</li>
+                        <li><strong>武汉大学</strong> - 中国最美大学之一，以樱花闻名</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center; margin: 40px 0;">
+                    <button class="btn" onclick="goBa
