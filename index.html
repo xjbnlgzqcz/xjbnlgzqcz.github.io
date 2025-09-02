@@ -3,141 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>两城抗战情况 - 武汉与南京</title>
+    <title>两城抗战历史 - 武汉与南京</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
         }
         
         body {
-            background: linear-gradient(135deg, #2c3e50, #4a6572);
+            background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
             color: #333;
-            min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.8;
+            padding-bottom: 50px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
         
+        /* 头部样式 */
         header {
             text-align: center;
-            padding: 40px 0;
-            background: rgba(0, 0, 0, 0.7);
+            padding: 50px 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1587334274527-ba54f0b5a357?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
             color: white;
-            margin-bottom: 30px;
-            border-bottom: 4px solid #e74c3c;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 40px;
+            border-bottom: 5px solid #c40d0d;
         }
         
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            color: #fff;
         }
         
         .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
             max-width: 800px;
             margin: 0 auto;
-            color: #ecf0f1;
+            opacity: 0.9;
         }
         
-        .cities-nav {
+        /* 导航菜单 */
+        .page-nav {
+            position: sticky;
+            top: 0;
+            background: #2c3e50;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
+            max-width: 1000px;
+            margin: 0 auto;
         }
         
-        .city-btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background: linear-gradient(45deg, #3498db, #2980b9);
+        .nav-btn {
+            padding: 15px 25px;
             color: white;
+            background: none;
             border: none;
-            border-radius: 50px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            position: relative;
         }
         
-        .city-btn.active {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
         
-        .city-btn:hover:not(.active) {
-            background: linear-gradient(45deg, #2980b9, #3498db);
-            transform: translateY(-2px);
+        .nav-btn.active {
+            background: #c40d0d;
         }
         
-        .content-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
+        .nav-btn.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #f8f8f8;
+        }
+        
+        /* 内容区域 */
+        .city-section {
+            background: white;
+            border-radius: 10px;
             padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .city-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: #c40d0d;
+        }
+        
+        .city-header {
+            display: flex;
+            align-items: center;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            display: none;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8e8e8;
         }
         
-        .content-section.active {
-            display: block;
-            animation: fadeIn 0.8s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .city-icon {
+            font-size: 2.5rem;
+            margin-right: 20px;
+            color: #c40d0d;
         }
         
         .city-title {
-            color: #2c3e50;
             font-size: 2.2rem;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #e74c3c;
-            text-align: center;
+            color: #2c3e50;
         }
         
-        .history-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
+        .content-block {
+            margin-bottom: 30px;
+        }
+        
+        .content-block h3 {
+            color: #c40d0d;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            padding-left: 15px;
+            border-left: 4px solid #c40d0d;
+        }
+        
+        .content-block p {
+            margin-bottom: 20px;
             text-align: justify;
-        }
-        
-        .history-content p {
-            margin-bottom: 20px;
+            font-size: 1.1rem;
             text-indent: 2em;
         }
         
-        .highlight {
-            background: linear-gradient(120deg, #fceabb 0%, #fccd4d 100%);
-            padding: 3px 6px;
-            border-radius: 3px;
-            font-weight: bold;
-        }
-        
+        /* 时间线样式 */
         .timeline {
-            margin: 30px 0;
-            padding: 20px;
             background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
             border-left: 5px solid #3498db;
-            border-radius: 5px;
         }
         
-        .timeline h3 {
+        .timeline h4 {
             color: #2c3e50;
             margin-bottom: 15px;
+            font-size: 1.3rem;
         }
         
         .timeline ul {
@@ -145,34 +180,33 @@
         }
         
         .timeline li {
-            margin-bottom: 10px;
-            padding-left: 20px;
+            margin-bottom: 12px;
+            padding-left: 25px;
             position: relative;
         }
         
         .timeline li:before {
-            content: "•";
-            color: #e74c3c;
-            font-weight: bold;
+            content: '•';
+            color: #c40d0d;
+            font-size: 1.5rem;
             position: absolute;
             left: 0;
-            font-size: 1.5rem;
+            top: -5px;
         }
         
-        .stats-box {
-            display: flex;
-            flex-wrap: wrap;
+        /* 数据统计 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin: 30px 0;
         }
         
-        .stat-item {
-            flex: 1;
-            min-width: 250px;
-            background: #e74c3c;
+        .stat-card {
+            background: linear-gradient(135deg, #2c3e50, #4a6572);
             color: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
@@ -187,117 +221,136 @@
             font-size: 1.1rem;
         }
         
+        /* 引用样式 */
+        .quote {
+            background: #fff9e6;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .quote:before {
+            content: '"';
+            font-size: 4rem;
+            color: #e67e22;
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-family: Georgia, serif;
+        }
+        
+        /* 页脚样式 */
         footer {
             text-align: center;
             padding: 30px;
             margin-top: 50px;
-            background: rgba(0, 0, 0, 0.8);
+            background: #2c3e50;
             color: #ecf0f1;
-            border-top: 3px solid #e74c3c;
+            border-radius: 10px;
         }
         
-        .quote {
-            font-style: italic;
-            margin: 20px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-left: 5px solid #e74c3c;
-            border-radius: 5px;
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #c40d0d;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #a00b0b;
+            transform: translateY(-3px);
         }
         
         /* 响应式设计 */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
-            .cities-nav {
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .nav-container {
                 flex-direction: column;
-                align-items: center;
             }
             
-            .city-btn {
-                width: 80%;
+            .city-section {
+                padding: 25px 20px;
             }
             
-            .content-section {
-                padding: 20px;
+            .city-title {
+                font-size: 1.8rem;
             }
             
-            .stats-box {
-                flex-direction: column;
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-block p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-monument"></i> 两城抗战情况</h1>
-            <p class="subtitle">武汉与南京在中国抗日战争中的重要历史地位与贡献</p >
-        </header>
-        
-        <div class="cities-nav">
-            <button class="city-btn active" onclick="showContent('wuhan')">武汉抗战历史</button>
-            <button class="city-btn" onclick="showContent('nanjing')">南京抗战历史</button>
+    <!-- 头部 -->
+    <header>
+        <h1><i class="fas fa-landmark"></i> 两城抗战历史</h1>
+        <p class="subtitle">武汉与南京在中国抗日战争中的重要历史地位与贡献</p >
+    </header>
+    
+    <!-- 导航 -->
+    <nav class="page-nav">
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="scrollToSection('wuhan')">武汉抗战历史</button>
+            <button class="nav-btn" onclick="scrollToSection('nanjing')">南京抗战历史</button>
         </div>
-        
-        <!-- 武汉内容部分 -->
-        <div id="wuhan-content" class="content-section active">
-            <h2 class="city-title"><i class="fas fa-city"></i> 武汉抗战历史</h2>
+    </nav>
+    
+    <div class="container">
+        <!-- 武汉部分 -->
+        <section id="wuhan" class="city-section">
+            <div class="city-header">
+                <div class="city-icon">
+                    <i class="fas fa-city"></i>
+                </div>
+                <h2 class="city-title">武汉抗战历史</h2>
+            </div>
             
-            <div class="history-content">
+            <div class="content-block">
                 <p>1927年蒋介石发动四一二反革命政变，大肆屠杀共产党人和革命群众，大革命遭到了局部的严重失败。此后，全国形成了三个政权，即原来的北洋军阀政府，上海、南京的蒋介石反革命政权和武汉国民政府。面对错综复杂的矛盾和尖锐激烈的斗争，需要中国共产党对形势有清醒的认识并采取果断行动，才能挽救革命。党的五大就是在这种非常状态下召开的。全体党员期望这次大会能正确判断当前局势，回答大家最为关注的如何从危急中挽救革命的问题。</p >
                 
                 <p>大会讨论通过了《中国共产党第五次全国代表大会宣言》及《中国共产党接受〈共产国际执行委员会第七次扩大全体会议关于中国问题决议案〉之决议》《政治形势与党的任务议决案》《土地问题议决案》《职工运动议决案》《组织问题议决案》《对于共产主义青年团工作决议案》等决议案，选出了由31名正式委员和14名候补委员组成的党的中央委员会。随后举行的五届一中全会选举陈独秀、蔡和森、李维汉、瞿秋白、张国焘、谭平山、李立三、周恩来为中央政治局委员，苏兆征、张太雷等为候补委员；选举陈独秀、张国焘、蔡和森为中央政治局常务委员会委员，陈独秀为总书记。大会第一次选举产生了中央监察委员会，由正式委员7人、候补委员3人组成。</p >
                 
                 <p>中共五大是在陈独秀右倾机会主义占统治地位的情况下召开的。党的五大虽然批评了陈独秀的错误，但对无产阶级如何争取领导权，如何领导农民进行土地革命，如何对待武汉国民政府和国民党，特别是如何建立党的革命武装等迫在眉睫的重大问题，都未能作出切实可行的回答，因此，难以承担在生死存亡的危急关头挽救大革命的重任。而真正结束中央所犯的右倾机会主义错误，制定正确的土地革命和武装起义方针，是在3个月后的八七会议上完成的。</p >
-                
-                <div class="quote">
-                    "武汉会战大大消耗了日军的有生力量，打破了日本妄想迫使中国屈服、早日结束战争的计划，是中国抗日战争战略转折的关键节点。"
-                </div>
-                
-                <h3>武汉会战</h3>
-                <p>武汉会战，又称武汉保卫战，是1938年6月至10月，中国军队为了保卫武汉，在安徽、江西、河南、湖北等省交界地区抗击侵华日军进攻的防御战役，是抗日战争战略防御阶段规模最大的一次战略性战役。</p >
-                
-                <div class="timeline">
-                    <h3><i class="fas fa-history"></i> 武汉会战时间线</h3>
-                    <ul>
-                        <li>1938年6月15日：日本御前会议正式决定实施攻占武汉的作战</li>
-                        <li>6月中旬至7月初：国民政府军事委员会制定和完善武汉保卫战作战计划</li>
-                        <li>8月至9月：中国军队在江南万家岭地区歼灭日军4个联队</li>
-                        <li>10月：日军攻陷岳阳、信阳，逼近武昌</li>
-                        <li>10月25日：中国军队按预定计划放弃武汉</li>
-                    </ul>
-                </div>
-                
-                <p>1938年6月15日，日本御前会议正式决定实施攻占武汉的作战。中国军队以武汉及附近地区为中心，同日本侵略军展开了一场大规模会战；6月中旬至7月初，国民政府军事委员会制定和完善了武汉保卫战的作战计划，具体作战方针是：在武汉外围布置主力军，利用鄱阳湖和大别山以及长江两岸丘陵湖沼等有利地形进行持久战。会战期间，中国共产党对武汉保卫战给予多方支持和配合。日军从长江南北分兵进逼武汉。中国军队节节抵抗，在江南万家岭地区歼灭敌人4个联队，在江北田家镇等地予敌以重创。随后日军发起反扑，相继攻陷岳阳、信阳，逼近武昌，推进至武胜关，对中国军队形成两翼包围之势。中国军队按预定计划向平汉铁路以西撤退，于10月25日放弃武汉。日军占领武汉后，因战线加长，国力所限，对华战略攻势已达极限，"速战速决"的迷梦彻底破灭。武汉会战历时4个半月，日军共伤亡20多万人。</p >
-                
-                <div class="stats-box">
-                    <div class="stat-item">
-                        <div class="stat-number">4.5</div>
-                        <div class="stat-label">个月持续时间</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">20万+</div>
-                        <div class="stat-label">日军伤亡人数</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">战略</div>
-                        <div class="stat-label">相持阶段开始</div>
-                    </div>
-                </div>
-                
-                <p>武汉会战意义重大，大大消耗了日军的有生力量，打破了日本妄想迫使中国屈服、早日结束战争的计划，是中国抗日战争战略转折的关键节点，粉碎了日军"速战速决"占领全中国的美梦。以武汉会战结束为标志，中国抗日战争进入战略相持阶段。武汉会战不仅是一场关乎战略存亡的军事较量，更立起中华儿女共筑抗日长城的团结丰碑。</p >
             </div>
-        </div>
-        
-        <!-- 南京内容部分 -->
-        <div id="nanjing-content" class="content-section">
-            <h2 class="city-title"><i class="fas fa-monument"></i> 南京抗战历史</h2>
             
-            <div class="history-content">
-                <p>南京大屠杀是对日军侵占南京后所犯屠杀、奸淫、纵火、劫掠等暴行的统称，是日军侵华暴行中最野蛮、最凶残的典型事件，主要发生于1937年12月13日至1938年1月的六周内。</p >
-                
-                <div class="timeline">
+            <div class="content-block">
+                <h3>武汉会战</h3>
+                <p>武汉会战
                
