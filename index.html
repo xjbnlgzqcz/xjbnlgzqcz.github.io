@@ -59,7 +59,10 @@
         header {
             text-align: center;
             padding: 80px 20px 60px;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1587334274527-ba54f0b5a357?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
             color: white;
             margin-bottom: 40px;
             border-bottom: 5px solid #c40d0d;
@@ -285,6 +288,13 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
             transition: all 0.3s;
             z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
         }
         
         .back-to-top:hover {
@@ -456,7 +466,7 @@
                     南京大屠杀是对日军侵占南京后所犯屠杀、奸淫、纵火、劫掠等暴行的统称，是日军侵华暴行中最野蛮、最凶残的典型事件，主要发生于1937年12月13日至1938年1月的六周内。
                 </div>
                 <div class="english-text">
-                    The Nanjing Massacre refers collectively to the atrocities committed by Japanese troops after occupying Nanjing, including massacre, rape, arson, and looting. It was the most brutal and cruel典型 incident of Japanese atrocities during the invasion of China, primarily occurring over six weeks from December 13, 1937, to January 1938.
+                    The Nanjing Massacre refers collectively to the atrocities committed by Japanese troops after occupying Nanjing, including massacre, rape, arson, and looting. It was the most brutal and cruel typical incident of Japanese atrocities during the invasion of China, primarily occurring over six weeks from December 13, 1937, to January 1938.
                 </div>
                 <div class="content-divider"></div>
                 
@@ -541,15 +551,88 @@
     </footer>
     
     <!-- 返回顶部按钮 -->
-    <div class="back-to-top" onclick="scrollToTop()">
+    <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </div>
 
     <script>
-        // 语言切换功能
+        // 修复后的JavaScript代码
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化语言
+            setLanguage('zh');
+            
+            // 语言切换功能
+            document.getElementById('lang-zh').addEventListener('click', function() {
+                setLanguage('zh');
+                setActiveLangButton('zh');
+            });
+            
+            document.getElementById('lang-en').addEventListener('click', function() {
+                setLanguage('en');
+                setActiveLangButton('en');
+            });
+            
+            // 返回顶部功能
+            document.getElementById('backToTop').addEventListener('click', scrollToTop);
+            
+            // 导航按钮功能
+            document.querySelectorAll('.nav-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    document.querySelectorAll('.nav-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    // 给当前点击的按钮添加active类
+                    this.classList.add('active');
+                });
+            });
+            
+            // 滚动显示返回顶部按钮
+            window.addEventListener('scroll', function() {
+                const backToTop = document.getElementById('backToTop');
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+        });
+        
+        // 设置语言
+        function setLanguage(lang) {
+            document.querySelectorAll('.i18n').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+        
+        // 设置活动语言按钮
+        function setActiveLangButton(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`lang-${lang}`).classList.add('active');
+        }
+        
+        // 滚动到指定部分
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // 返回顶部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // 翻译对象
         const translations = {
             'zh': {
-                'title': '两城抗战历史',
+                'title': '双城抗战历史',
                 'subtitle': '武汉与南京在中国抗日战争中的重要历史地位与贡献',
                 'nav_wuhan': '武汉抗战历史',
                 'nav_nanjing': '南京抗战历史',
@@ -579,7 +662,7 @@
                 'nanjing_stat_weeks': '周暴行持续时间',
                 'nanjing_stat_survivors': '登记在册幸存者(2025年)',
                 'footer_message': '铭记历史，缅怀先烈，珍爱和平，开创未来',
-                'footer_name': '两城抗战历史纪念馆',
+                'footer_name': '西北工业大学双城抗战实践队',
                 'footer_created': '使用 GitHub Pages 创建'
             },
             'en': {
@@ -588,4 +671,35 @@
                 'nav_wuhan': 'Wuhan WWII History',
                 'nav_nanjing': 'Nanjing WWII History',
                 'wuhan_title': 'Wuhan\'s War of Resistance History',
-                'wuhan_battle_title': 'Battle
+                'wuhan_battle_title': 'Battle of Wuhan',
+                'wuhan_timeline_title': 'Battle of Wuhan Timeline',
+                'wuhan_timeline_1': 'June 15, 1938: Japanese Imperial Conference formally decides to launch operation to capture Wuhan',
+                'wuhan_timeline_2': 'Mid-June to early July: National Military Council formulates and refines Wuhan defense plan',
+                'wuhan_timeline_3': 'August to September: Chinese forces annihilate 4 Japanese regiments in Wanjialing area',
+                'wuhan_timeline_4': 'October: Japanese capture Yueyang and Xinyang, approach Wuchang',
+                'wuhan_timeline_5': 'October 25: Chinese forces abandon Wuhan according to predetermined plan',
+                'wuhan_quote': 'The Battle of Wuhan greatly depleted Japanese forces, shattered Japan\'s plan to force China\'s surrender, and was a crucial turning point in China\'s War of Resistance.',
+                'nanjing_title': 'Nanjing WWII History',
+                'nanjing_timeline_title': 'Nanjing Massacre Timeline',
+                'nanjing_timeline_1': 'November 1937: Battle of Shanghai ends, Japanese advance on Nanjing in three routes',
+                'nanjing_timeline_2': 'December 7: Matsui drafts "Essentials for the Capture of Nanjing"',
+                'nanjing_timeline_3': 'December 13: Japanese occupy Nanjing, begin massacre',
+                'nanjing_timeline_4': 'January 1938: Large-scale massacres gradually decrease',
+                'nanjing_timeline_5': '1946-1948: Tokyo and Nanjing Trials hold war criminals accountable',
+                'nanjing_quote': 'The Nanjing Massacre was a criminal act by Japanese invaders that blatantly violated international treaties and basic human moral principles.',
+                'nanjing_significance_title': 'Historical Significance and Memorial',
+                'stat_duration': 'Months Duration',
+                'stat_casualties': 'Japanese Casualties',
+                'stat_strategic': 'Strategic',
+                'stat_phase': 'Stalemate Phase Begins',
+                'nanjing_stat_victims': 'Victims',
+                'nanjing_stat_weeks': 'Weeks of Atrocities',
+                'nanjing_stat_survivors': 'Registered Survivors (2025)',
+                'footer_message': 'Remember History, Honor Martyrs, Cherish Peace, Create Future',
+                'footer_name': 'Northwestern Polytechnical University Dual City Anti Japanese War Practice Team',
+                'footer_created': 'Created with GitHub Pages'
+            }
+        };
+    </script>
+</body>
+</html>
